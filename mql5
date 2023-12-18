@@ -1,0 +1,95 @@
+
+//+------------------------------------------------------------------+
+//|                                        JackPots.mq5              |
+//|                      Copyright 2022, Forex Robot Easy Team        |
+//|                             https://www.forexroboteasy.com        |
+//+------------------------------------------------------------------+
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//|                              INPUTS                                |
+//|                                                                  |
+//+------------------------------------------------------------------+
+input int RSI_Period = 14;    // Period for RSI calculation
+input double RSI_Level = 70;  // Overbought level for RSI
+input double RSI_Level2 = 30; // Oversold level for RSI
+input int Volume_Step = 5;    // Step for detecting volume increase
+input double Coefficient = 0.1; // Coefficient of addition
+input ENUM_TIMEFRAMES Timeframe = PERIOD_M5; // Timeframe for analysis
+input string Symbol = 'EURUSD'; // Currency pair for trading
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//|                            GLOBAL VARIABLES                       |
+//|                                                                  |
+//+------------------------------------------------------------------+
+double prevVolume = 0; // Previous volume value
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//|                            INITIALIZATION                         |
+//|                                                                  |
+//+------------------------------------------------------------------+
+void OnInit()
+{
+   // Initialize necessary indicators and variables
+}
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//|                          ENTRY FUNCTION                           |
+//|                                                                  |
+//+------------------------------------------------------------------+
+void OnTick()
+{
+   // Calculate RSI value
+   double rsi = iRSI(Symbol, Timeframe, RSI_Period, PRICE_CLOSE, 0);
+   
+   // Check for RSI signal
+   if (rsi >= RSI_Level)
+   {
+      // Place a buy trade
+      // ...
+   }
+   else if (rsi <= RSI_Level2)
+   {
+      // Place a sell trade
+      // ...
+   }
+   
+   // Calculate current volume
+   double volume = iVolume(Symbol, Timeframe, 0);
+   
+   // Check for volume increase
+   if (volume > prevVolume + Volume_Step)
+   {
+      // Adjust position size
+      double positionSize = Lots * (1 + Coefficient);
+      
+      // Place additional trades
+      // ...
+   }
+   
+   // Update previous volume
+   prevVolume = volume;
+}
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//|                       OTHER REQUIRED FUNCTIONS                    |
+//|                                                                  |
+//+------------------------------------------------------------------+
+void OnDeinit(const int reason)
+{
+   // Cleanup and deinitialize
+}
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//|                          TESTING FUNCTION                         |
+//|                                                                  |
+//+------------------------------------------------------------------+
+void Test()
+{
+   // Perform testing and analysis
+}
